@@ -34,10 +34,21 @@ struct ContentView: View {
                         .background(.white)
                         .clipShape(.circle)
                 }
-
             }
-
-
+        }
+        .onAppear() {
+            findLocation(name: "Springfield")
+        }
+    }
+    
+    func findLocation(name: String) {
+        locationManager.geocoder.geocodeAddressString(name) { (placemarks, error)  in
+            if placemarks != nil {
+                for placemark in placemarks! {
+                    let place = Place(name: "\(placemark.name!), \(placemark.administrativeArea!)", coordinate: placemark.location!.coordinate)
+                    places.append(place)
+                }
+            }
         }
     }
 }
