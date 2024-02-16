@@ -10,15 +10,7 @@ import MapKit
 
 struct ContentView: View {
     @StateObject var locationManager = LocationManager()
-    @State private var startPosition = MapCameraPosition.region(
-        MKCoordinateRegion(center: CLLocationCoordinate2D(
-            latitude: 42.15559,
-            longitude: -88.14692),
-        span: MKCoordinateSpan(
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05)
-        )
-    )
+    @State private var startPosition = MapCameraPosition.userLocation(fallback: .automatic)
     @State private var places = [Place(name: "Barrington High School",
                         coordinate: CLLocationCoordinate2D(
                             latitude: 42.1565, longitude: -88.1480))]
